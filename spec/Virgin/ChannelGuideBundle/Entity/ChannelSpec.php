@@ -35,7 +35,7 @@ class ChannelSpec extends ObjectBehavior
     {
         $number = "1";
         $this->setNumber($number);
-        $this->getNumber()->shouldReturn($number);
+        $this->getNumber()->shouldBeLike($number);
     }
 
     function it_can_get_overridden_number(Channel $channel)
@@ -46,7 +46,7 @@ class ChannelSpec extends ObjectBehavior
         $channel->getNumber()->willReturn($overriddenNumber);
 
         $this->setRegionOverride($channel);
-        $this->getNumber()->shouldReturn($overriddenNumber);
+        $this->getNumber()->shouldBeLike($overriddenNumber);
     }
 
 }
