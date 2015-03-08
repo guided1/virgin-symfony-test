@@ -1,0 +1,5 @@
+virgin_channel_guide_homepage:
+    path:     /
+    defaults: { _controller: VirginChannelGuideBundle:Default:index }
+
+
