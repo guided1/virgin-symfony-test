@@ -12,4 +12,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class ChannelRepository extends EntityRepository
 {
+
+    public function findByRegionAndPackage(Region $region, Package $package)
+    {
+
+    }
 }
