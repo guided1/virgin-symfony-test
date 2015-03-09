@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="Virgin\ChannelGuideBundle\Entity\ChannelRepository")
  */
-class Channel
+class Channel implements ChannelInterface
 {
     /**
      * @var integer
@@ -33,17 +33,6 @@ class Channel
      */
     private $number;
 
-
-    /**
-     * @var Channel
-     */
-    private $baseChannel = null;
-
-    /**
-     * @var Channel
-     */
-    private $baseChannelId = null;
-
     /**
      * Get id
      *
@@ -54,24 +43,6 @@ class Channel
         return $this->id;
     }
 
-    /**
-     * @return Channel
-     */
-    public function getBaseChannelId()
-    {
-        return $this->baseChannelId;
-    }
-
-    /**
-     * @param Channel $baseChannelId
-     */
-    public function setBaseChannelId($baseChannelId)
-    {
-        $this->baseChannelId = $baseChannelId;
-    }
-
-
-
     public function setName($name)
     {
         $this->name = $name;
@@ -79,16 +50,7 @@ class Channel
 
     public function getName()
     {
-        $name = $this->name;
-        if (is_null($name) && !is_null($this->baseChannel)) {
-            $name = $this->baseChannel->getName();
-        }
-        return $name;
-    }
-
-    public function setBaseChannel($channel)
-    {
-        $this->baseChannel = $channel;
+        return $this->name;
     }
 
     public function setNumber($number)
@@ -98,10 +60,6 @@ class Channel
 
     public function getNumber()
     {
-        $number = $this->number;
-        if (is_null($number) && !is_null($this->baseChannel)) {
-            $number = $this->baseChannel->getNumber();
-        }
-        return $number;
+        return $this->number;
     }
 }

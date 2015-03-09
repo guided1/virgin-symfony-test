@@ -13,39 +13,29 @@ use Doctrine\ORM\EntityRepository;
 
 class ChannelFactory {
 
-    private $repository;
+    private $channelRepository;
+    private $regionalisedChannelRepository;
     private $region;
     private $package;
 
-    public function __construct(EntityRepository $repository, $region, $package)
+    public function __construct(EntityRepository $repository, $package)
     {
-        $this->repository = $repository;
-        $this->region = $region;
+        $this->channelRepository = $repository;
         $this->package = $package;
     }
 
-    public function composeChannels($channelList)
+    public function composeChannels($channelList, $regionDecorators)
     {
         $list = array();
-        do {
-            $listWasChanged = false;
-            foreach ($channelList as $key => $channel) {
-                if ($channel->getBaseChannelId() === null) {
-                    $list[$channel->getId()] = $channel;
-                    unset($channelList[$key]);
-                    $listWasChanged = true;
-                }
+        foreach ($channelList as $key => $channel) {
+            $list[$channel->getId()] = $channel;
+        }
 
-                if ($channel->getBaseChannelId() !== null && isset($list[$channel->getBaseChannelId()])) {
-                    $channel->setBaseChannel($list[$channel->getBaseChannelId()]);
-                    unset($list[$channel->getBaseChannelId()]);
-                    $list[$channel->getId()] = $channel;
-                    unset($channelList[$key]);
-                    $listWasChanged = true;
-                }
+        foreach ($regionDecorators as $regionDecorator) {
+            if (isset($list[$regionDecorator->getBaseChannelId()])) {
+                $list[$regionDecorator->getBaseChannelId()] = $regionDecorator;
             }
-
-        } while ($listWasChanged && !empty($channelList));
+         }
 
         return $list;
     }
@@ -53,7 +43,18 @@ class ChannelFactory {
 
     public function getChannels()
     {
-        $channels = $this->repository->findByRegionAndPackage($this->region, $this->package);
-        return $this->composeChannels($channels);
+        $channels = $this->channelRepository->findByPackage($this->region, $this->package);
+        $decorators = $this->regionalisedChannelRepository->findByRegionAndPackage($this->region, $this->package);
+        return $this->composeChannels($channels, $decorators);
+    }
+
+    public function setRegionalisedChannelRepository($repository)
+    {
+        $this->regionalisedChannelRepository = $repository;
+    }
+
+    public function setRegion($region)
+    {
+        $this->region = $region;
     }
 }
