@@ -21,7 +21,7 @@ class PackageSpec extends ObjectBehavior
         $this->getChannels()->shouldHaveCount(2);
     }
 
-    function it_can_be_made_of_other_packages($smallPackage, $mediumPackage)
+    function it_can_be_composed_of_other_packages($smallPackage, $mediumPackage)
     {
         $this->addPackage($smallPackage);
         $this->addPackage($mediumPackage);

@@ -88,6 +88,7 @@ class Package
             foreach ($this->packages as $package) {
                 $channels = array_merge($channels, $package->getChannels());
             }
+            // sort and make sure channels are unique
         }
         return $channels;
     }

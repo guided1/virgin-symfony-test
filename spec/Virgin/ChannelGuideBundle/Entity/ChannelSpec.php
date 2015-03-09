@@ -20,15 +20,24 @@ class ChannelSpec extends ObjectBehavior
         $this->getName()->shouldReturn($name);
     }
 
-    function it_can_get_overridden_name(Channel $channel)
+    function it_can_get_overridden_name(Channel $baseChannel)
     {
-        $name = "BBC 3";
+        $baseName = "BBC 3";
+        $name = "BBC 3 - London";
         $this->setName($name);
-        $overriddenName = "BBC 3 - London";
-        $channel->getName()->willReturn($overriddenName);
+        $baseChannel->getName()->willReturn($baseName);
 
-        $this->setRegionOverride($channel);
-        $this->getName()->shouldReturn($overriddenName);
+        $this->setBaseChannel($baseChannel);
+        $this->getName()->shouldReturn($name);
+    }
+
+    function it_can_get_base_channel_name_if_not_set(Channel $baseChannel)
+    {
+        $baseName = "BBC 3";
+        $baseChannel->getName()->willReturn($baseName);
+
+        $this->setBaseChannel($baseChannel);
+        $this->getName()->shouldReturn($baseName);
     }
 
     function it_can_get_base_number()
@@ -38,15 +47,24 @@ class ChannelSpec extends ObjectBehavior
         $this->getNumber()->shouldBeLike($number);
     }
 
-    function it_can_get_overridden_number(Channel $channel)
+    function it_can_get_overridden_number(Channel $baseChannel)
     {
-        $number = "1";
+        $number = "100";
         $this->setNumber($number);
-        $overriddenNumber = "100";
-        $channel->getNumber()->willReturn($overriddenNumber);
+        $baseNumber = "1";
+        $baseChannel->getNumber()->willReturn($baseNumber);
 
-        $this->setRegionOverride($channel);
-        $this->getNumber()->shouldBeLike($overriddenNumber);
+        $this->setBaseChannel($baseChannel);
+        $this->getNumber()->shouldBeLike($number);
+    }
+
+    function it_can_get_base_channel_number_if_not_set(Channel $baseChannel)
+    {
+        $baseNumber = "1";
+        $baseChannel->getNumber()->willReturn($baseNumber);
+
+        $this->setBaseChannel($baseChannel);
+        $this->getNumber()->shouldBeLike($baseNumber);
     }
 
 }

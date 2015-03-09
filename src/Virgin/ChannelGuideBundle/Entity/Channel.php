@@ -37,7 +37,12 @@ class Channel
     /**
      * @var Channel
      */
-    private $regionOverride = null;
+    private $baseChannel = null;
+
+    /**
+     * @var Channel
+     */
+    private $baseChannelId = null;
 
     /**
      * Get id
@@ -49,6 +54,24 @@ class Channel
         return $this->id;
     }
 
+    /**
+     * @return Channel
+     */
+    public function getBaseChannelId()
+    {
+        return $this->baseChannelId;
+    }
+
+    /**
+     * @param Channel $baseChannelId
+     */
+    public function setBaseChannelId($baseChannelId)
+    {
+        $this->baseChannelId = $baseChannelId;
+    }
+
+
+
     public function setName($name)
     {
         $this->name = $name;
@@ -56,15 +79,16 @@ class Channel
 
     public function getName()
     {
-        if (!is_null($this->regionOverride)) {
-            return $this->regionOverride->getName();
+        $name = $this->name;
+        if (is_null($name) && !is_null($this->baseChannel)) {
+            $name = $this->baseChannel->getName();
         }
-        return $this->name;
+        return $name;
     }
 
-    public function setRegionOverride($channel)
+    public function setBaseChannel($channel)
     {
-        $this->regionOverride = $channel;
+        $this->baseChannel = $channel;
     }
 
     public function setNumber($number)
@@ -74,9 +98,10 @@ class Channel
 
     public function getNumber()
     {
-        if (!is_null($this->regionOverride)) {
-            return $this->regionOverride->getNumber();
+        $number = $this->number;
+        if (is_null($number) && !is_null($this->baseChannel)) {
+            $number = $this->baseChannel->getNumber();
         }
-        return $this->number;
+        return $number;
     }
 }
