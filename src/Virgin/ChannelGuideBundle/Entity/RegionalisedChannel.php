@@ -3,6 +3,8 @@
 namespace Virgin\ChannelGuideBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
+
 
 /**
  * Regionalised Channel
@@ -11,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="regionalised_channel")
  * @ORM\Entity(repositoryClass="Virgin\ChannelGuideBundle\Entity\RegionalisedChannelRepository")
+ * @JMS\AccessType("public_method")
  */
 class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
 {
@@ -43,6 +46,7 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
      *
      * @ORM\OneToOne(targetEntity="Channel")
      * @ORM\JoinColumn(name="base_channel_id", referencedColumnName="id")
+     * @JMS\Exclude();
      */
     private $baseChannel = null;
 
@@ -52,6 +56,7 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
      *
      * @ORM\OneToOne(targetEntity="Region")
      * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     * @JMS\Exclude()
      */
     private $region = null;
 
@@ -69,6 +74,10 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
     }
 
     public function getBaseChannelId()

@@ -18,7 +18,7 @@ class RegionController extends Controller {
      * @return array
      * @View()
      */
-    public function getRegionAction()
+    public function getRegionsAction()
     {
         $regions = $this->getDoctrine()->getRepository('VirginChannelGuideBundle:Region')->findAll();
         return array('regions' => $regions);

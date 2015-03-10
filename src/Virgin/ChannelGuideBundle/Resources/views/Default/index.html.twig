@@ -1,1 +1,22 @@
-Hello!
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Channel List</title>
+    <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <select name="region" id="js-region"><option></option></select>
+        <select name="package" id="js-package"><option></option></select>
+    </div>
+    <div>
+        <h1>Channel list</h1>
+        <ul id="js-list">
+        </ul>
+    </div>
+    <script src="{{ asset('bundles/virginchannelguide/js/scripts.js') }}"></script>
+
+</body>
+</html>
