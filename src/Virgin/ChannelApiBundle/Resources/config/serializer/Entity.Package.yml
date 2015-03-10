@@ -1,5 +1,0 @@
-Virgin\ChannelGuideBundle\Entity\Package:
-    exclusion_policy: all
-    properties:
-        id:
-            expose: true

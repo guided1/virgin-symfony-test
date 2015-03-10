@@ -10,3 +10,7 @@ regions:
 packages:
     type: rest
     resource: Virgin\ChannelApiBundle\Controller\PackageController
+
+channels:
+    type: rest
+    resource: Virgin\ChannelApiBundle\Controller\ChannelController

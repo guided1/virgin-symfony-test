@@ -110,10 +110,11 @@ class Package
     public function getChannels()
     {
         /** @var PersistentCollection $channels */
-        $channels = $this->channels;
+        $channels = empty($this->channels) ? new ArrayCollection(array()) : $this->channels;
         if (!empty($this->subPackages)) {
             foreach ($this->subPackages as $package) {
-                $channels = new ArrayCollection(array_merge($channels->toArray(), $package->getChannels()->toArray()));
+                $channels = new ArrayCollection(array_merge($channels->toArray(),
+                    $package->getChannels()->toArray()));
             }
             // sort and make sure channels are unique
         }

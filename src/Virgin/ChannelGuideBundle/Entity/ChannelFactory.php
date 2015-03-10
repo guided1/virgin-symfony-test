@@ -18,10 +18,10 @@ class ChannelFactory {
     private $region;
     private $package;
 
-    public function __construct(EntityRepository $repository, $package)
+    public function __construct(EntityRepository $repository, EntityRepository $regionalisedChannelRepository)
     {
         $this->channelRepository = $repository;
-        $this->package = $package;
+        $this->regionalisedChannelRepository = $regionalisedChannelRepository;
     }
 
     public function composeChannels($channelList, $regionDecorators)
@@ -48,9 +48,9 @@ class ChannelFactory {
         return $this->composeChannels($channels, $decorators);
     }
 
-    public function setRegionalisedChannelRepository($repository)
+    public function setPackage($package)
     {
-        $this->regionalisedChannelRepository = $repository;
+        $this->package = $package;
     }
 
     public function setRegion($region)

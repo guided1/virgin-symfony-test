@@ -2,6 +2,7 @@
 
 namespace spec\Virgin\ChannelGuideBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Virgin\ChannelGuideBundle\Entity\Package;
@@ -15,8 +16,8 @@ class ChannelFactorySpec extends ObjectBehavior
 {
     function let(ChannelRepository $channelRepository, RegionalisedChannelRepository $regionalisedChannelRepository,  Region $region, Package $package)
     {
-        $this->beConstructedWith($channelRepository, $package);
-        $this->setRegionalisedChannelRepository($regionalisedChannelRepository);
+        $this->beConstructedWith($channelRepository, $regionalisedChannelRepository);
+        $this->setPackage($package);
         $this->setRegion($region);
     }
 

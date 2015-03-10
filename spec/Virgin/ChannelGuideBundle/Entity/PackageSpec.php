@@ -2,6 +2,7 @@
 
 namespace spec\Virgin\ChannelGuideBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Virgin\ChannelGuideBundle\Entity\Channel;
@@ -30,10 +31,9 @@ class PackageSpec extends ObjectBehavior
 
     function it_can_get_channels_from_packages_it_contains(Package $smallPackage, Channel $channel, Channel $channel1, Channel $channel2)
     {
-        $smallPackage->getChannels()->willReturn(array($channel));
+        $smallPackage->getChannels()->willReturn(new ArrayCollection(array($channel)));
         $this->addSubPackage($smallPackage);
-        $this->addChannel($channel1);
-        $this->addChannel($channel2);
+        $this->setChannels(new ArrayCollection(array($channel1, $channel2)));
         $this->getChannels()->shouldHaveCount(3);
     }
 }
