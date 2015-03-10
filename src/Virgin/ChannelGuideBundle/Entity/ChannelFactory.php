@@ -43,7 +43,7 @@ class ChannelFactory {
 
     public function getChannels()
     {
-        $channels = $this->channelRepository->findByPackage($this->region, $this->package);
+        $channels = $this->channelRepository->findByPackage($this->package);
         $decorators = $this->regionalisedChannelRepository->findByRegionAndPackage($this->region, $this->package);
         return $this->composeChannels($channels, $decorators);
     }

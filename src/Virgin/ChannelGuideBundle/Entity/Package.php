@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Package
  *
- * @ORM\Table()
+ * @ORM\Table(name="package")
  * @ORM\Entity
  */
 class Package
@@ -21,11 +21,28 @@ class Package
      */
     private $id;
 
+    /**
+     *
+     * @ORM\Column(type="string")
+     */
     private $name;
 
+    /**
+     * @var array
+     * @ORM\ManyToMany(targetEntity="Channel")
+     * @ORM\JoinTable(name="package_channel")
+     */
     private $channels = array();
 
-    private $packages = array();
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Package")
+     * @ORM\JoinTable(name="package_sub_package",
+     *      joinColumns={@ORM\JoinColumn(name="package_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="sub_package_id", referencedColumnName="id")}
+     *      )
+     **/
+    private $subPackages = array();
 
     /**
      * Get id
@@ -94,14 +111,14 @@ class Package
     }
 
 
-    public function addPackage($package)
+    public function addSubPackage($package)
     {
-        $this->packages[] = $package;
+        $this->subPackages[] = $package;
     }
 
 
-    public function getPackages()
+    public function getSubPackages()
     {
-        return $this->packages;
+        return $this->subPackages;
     }
 }

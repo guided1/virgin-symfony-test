@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Channel
  *
- * @ORM\Table()
+ * @ORM\Table(name="channel")
  * @ORM\Entity(repositoryClass="Virgin\ChannelGuideBundle\Entity\ChannelRepository")
  */
 class Channel implements ChannelInterface
@@ -24,12 +24,14 @@ class Channel implements ChannelInterface
 
     /**
      * @var string
+     * @ORM\Column(type="string")
      */
     private $name;
 
 
     /**
      * @var number
+     * @ORM\Column(type="string")
      */
     private $number;
 

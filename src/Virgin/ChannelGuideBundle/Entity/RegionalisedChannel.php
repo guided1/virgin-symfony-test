@@ -5,9 +5,11 @@ namespace Virgin\ChannelGuideBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Channel
+ * Regionalised Channel
  *
- * @ORM\Table()
+ * Channel Customisations for a region.
+ *
+ * @ORM\Table(name="regionalised_channel")
  * @ORM\Entity(repositoryClass="Virgin\ChannelGuideBundle\Entity\RegionalisedChannelRepository")
  */
 class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
@@ -24,25 +26,38 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=false)
      */
     private $name;
 
 
     /**
      * @var number
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=false)
      */
     private $number;
 
 
     /**
      * @var Channel
+     *
+     * @ORM\OneToOne(targetEntity="Channel")
+     * @ORM\JoinColumn(name="base_channel_id", referencedColumnName="id")
      */
     private $baseChannel = null;
 
+
     /**
      * @var Channel
+     *
+     * @ORM\OneToOne(targetEntity="Region")
+     * @ORM\JoinColumn(name="region_id", referencedColumnName="id")
+     */
+    private $region = null;
+
+
+    /**
+     * @var int
      */
     private $baseChannelId = null;
 
