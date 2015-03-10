@@ -1,0 +1,30 @@
+channel:
+    path:     /
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:index" }
+
+channel_show:
+    path:     /{id}/show
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:show" }
+
+channel_new:
+    path:     /new
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:new" }
+
+channel_create:
+    path:     /create
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:create" }
+    requirements: { _method: post }
+
+channel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:edit" }
+
+channel_update:
+    path:     /{id}/update
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:update" }
+    requirements: { _method: post|put }
+
+channel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VirginChannelGuideBundle:Channel:delete" }
+    requirements: { _method: post|delete }

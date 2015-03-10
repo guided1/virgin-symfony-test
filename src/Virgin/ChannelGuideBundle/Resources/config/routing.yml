@@ -1,3 +1,7 @@
+virgin_channel_guide_channel:
+    resource: "@VirginChannelGuideBundle/Resources/config/routing/channel.yml"
+    prefix:   /channel
+
 virgin_channel_guide_homepage:
     path:     /
     defaults: { _controller: VirginChannelGuideBundle:Default:index }
