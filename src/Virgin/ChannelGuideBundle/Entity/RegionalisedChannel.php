@@ -26,14 +26,14 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
 
     /**
      * @var string
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $name;
 
 
     /**
      * @var number
-     * @ORM\Column(type="string", nullable=false)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $number;
 
@@ -81,6 +81,11 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
         $this->baseChannelId = $baseChannelId;
     }
 
+    public function getBaseChannel()
+    {
+        return $this->baseChannel;
+    }
+
     public function setName($name)
     {
         $this->name = $name;
@@ -112,5 +117,21 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
             $number = $this->baseChannel->getNumber();
         }
         return $number;
+    }
+
+    /**
+     * @return Channel
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Channel $region
+     */
+    public function setRegion($region)
+    {
+        $this->region = $region;
     }
 }
