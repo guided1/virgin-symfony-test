@@ -1,3 +1,7 @@
+virgin_channel_api:
+    resource: "@VirginChannelApiBundle/Resources/config/routing.yml"
+    prefix:   api/
+
 virgin_channel_guide:
     resource: "@VirginChannelGuideBundle/Resources/config/routing.yml"
     prefix:   /

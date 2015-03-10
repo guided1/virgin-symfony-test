@@ -2,13 +2,17 @@
 
 namespace Virgin\ChannelGuideBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
+use Doctrine\ORM\PersistentCollection;
 
 /**
  * Package
  *
  * @ORM\Table(name="package")
  * @ORM\Entity
+ * @JMS\AccessType("public_method")
  */
 class Package
 {
@@ -41,6 +45,7 @@ class Package
      *      joinColumns={@ORM\JoinColumn(name="package_id", referencedColumnName="id")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="sub_package_id", referencedColumnName="id")}
      *      )
+     * @JMS\Exclude()
      **/
     private $subPackages = array();
 
@@ -52,6 +57,10 @@ class Package
     public function getId()
     {
         return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
     }
 
     /**
@@ -100,10 +109,11 @@ class Package
      */
     public function getChannels()
     {
+        /** @var PersistentCollection $channels */
         $channels = $this->channels;
-        if (!empty($this->packages)) {
-            foreach ($this->packages as $package) {
-                $channels = array_merge($channels, $package->getChannels());
+        if (!empty($this->subPackages)) {
+            foreach ($this->subPackages as $package) {
+                $channels = new ArrayCollection(array_merge($channels->toArray(), $package->getChannels()->toArray()));
             }
             // sort and make sure channels are unique
         }

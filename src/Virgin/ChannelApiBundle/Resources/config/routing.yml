@@ -1,0 +1,12 @@
+virgin_channel_api_homepage:
+    path:     /
+    defaults: { _controller: VirginChannelApiBundle:Default:index }
+
+
+regions:
+    type: rest
+    resource: Virgin\ChannelApiBundle\Controller\RegionController
+
+packages:
+    type: rest
+    resource: Virgin\ChannelApiBundle\Controller\PackageController
