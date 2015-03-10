@@ -1,20 +1,10 @@
 services:
-#    virgin_channel_guide.example:
-#        class: Virgin\ChannelGuideBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
-
-    virgin_channel_guide.channel_repository:
-        class: Doctrine\Common\Persistence\ObjectRepository
-        factory_service: doctrine # this is an instance of Registry
-        factory_method: getRepository
-        arguments: [ VirginChannelGuideBundle:Channel ]
-
     virgin_channel_guide.regonlised_channel_repository:
         class: Doctrine\Common\Persistence\ObjectRepository
-        factory_service: doctrine # this is an instance of Registry
+        factory_service: doctrine
         factory_method: getRepository
         arguments: [ VirginChannelGuideBundle:RegionalisedChannel ]
 
     virgin_channel_guide.channel_factory:
         class: Virgin\ChannelGuideBundle\Entity\ChannelFactory
-        arguments: [@virgin_channel_guide.channel_repository, @virgin_channel_guide.regonlised_channel_repository]
+        arguments: [@virgin_channel_guide.regonlised_channel_repository]

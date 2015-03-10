@@ -73,7 +73,7 @@ class RegionalisedChannel implements ChannelInterface, ChannelDecoratorInterface
 
     public function getBaseChannelId()
     {
-        return $this->baseChannelId;
+        return $this->baseChannel->getId();
     }
 
     public function setBaseChannelId($baseChannelId)

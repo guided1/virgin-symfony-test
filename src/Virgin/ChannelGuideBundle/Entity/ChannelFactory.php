@@ -13,14 +13,12 @@ use Doctrine\ORM\EntityRepository;
 
 class ChannelFactory {
 
-    private $channelRepository;
     private $regionalisedChannelRepository;
     private $region;
     private $package;
 
-    public function __construct(EntityRepository $repository, EntityRepository $regionalisedChannelRepository)
+    public function __construct(EntityRepository $regionalisedChannelRepository)
     {
-        $this->channelRepository = $repository;
         $this->regionalisedChannelRepository = $regionalisedChannelRepository;
     }
 
@@ -43,8 +41,9 @@ class ChannelFactory {
 
     public function getChannels()
     {
-        $channels = $this->channelRepository->findByPackage($this->package);
-        $decorators = $this->regionalisedChannelRepository->findByRegionAndPackage($this->region, $this->package);
+        $channels = $this->package->getChannels();
+
+        $decorators = $this->regionalisedChannelRepository->findChannelsByRegion($this->region);
         return $this->composeChannels($channels, $decorators);
     }
 

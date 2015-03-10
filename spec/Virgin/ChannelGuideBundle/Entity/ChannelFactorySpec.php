@@ -14,9 +14,9 @@ use Virgin\ChannelGuideBundle\Entity\RegionalisedChannelRepository;
 
 class ChannelFactorySpec extends ObjectBehavior
 {
-    function let(ChannelRepository $channelRepository, RegionalisedChannelRepository $regionalisedChannelRepository,  Region $region, Package $package)
+    function let(RegionalisedChannelRepository $regionalisedChannelRepository,  Region $region, Package $package)
     {
-        $this->beConstructedWith($channelRepository, $regionalisedChannelRepository);
+        $this->beConstructedWith($regionalisedChannelRepository);
         $this->setPackage($package);
         $this->setRegion($region);
     }
@@ -40,20 +40,19 @@ class ChannelFactorySpec extends ObjectBehavior
         $this->composeChannels($channels, $regionChannels)[1]->getId()->shouldReturn(2);
     }
 
-    function it_can_get_channels_from_the_repository($channelRepository, $regionalisedChannelRepository, Channel $baseChannel,Channel $baseChannel2, RegionalisedChannel $regionChannel)
+    function it_can_get_channels_from_the_repository($regionalisedChannelRepository, $package, Channel $baseChannel,Channel $baseChannel2, RegionalisedChannel $regionChannel)
     {
         $baseChannel->getId()->willReturn(1);
         $baseChannel2->getId()->willReturn(5);
 
         $regionChannel->getBaseChannelId()->willReturn(1);
         $regionChannel->getId()->willReturn(2);
-        // $regionChannel->setBaseChannel($baseChannel)->shouldBeCalled();
 
         $channels = array($baseChannel2, $baseChannel);
         $channelsDecorators = array($regionChannel);
 
-        $channelRepository->findByPackage(Argument::any())->willReturn($channels);
-        $regionalisedChannelRepository->findByRegionAndPackage(Argument::any(), Argument::any())->willReturn($channelsDecorators);
+        $package->getChannels()->willReturn($channels);
+        $regionalisedChannelRepository->findChannelsByRegion(Argument::any())->willReturn($channelsDecorators);
         $this->getChannels()->shouldHaveCount(2);
         $this->getChannels()[1]->getId()->shouldReturn(2);
     }
