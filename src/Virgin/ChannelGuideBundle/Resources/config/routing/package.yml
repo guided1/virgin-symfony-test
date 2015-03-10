@@ -1,0 +1,30 @@
+package:
+    path:     /
+    defaults: { _controller: "VirginChannelGuideBundle:Package:index" }
+
+package_show:
+    path:     /{id}/show
+    defaults: { _controller: "VirginChannelGuideBundle:Package:show" }
+
+package_new:
+    path:     /new
+    defaults: { _controller: "VirginChannelGuideBundle:Package:new" }
+
+package_create:
+    path:     /create
+    defaults: { _controller: "VirginChannelGuideBundle:Package:create" }
+    requirements: { _method: post }
+
+package_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VirginChannelGuideBundle:Package:edit" }
+
+package_update:
+    path:     /{id}/update
+    defaults: { _controller: "VirginChannelGuideBundle:Package:update" }
+    requirements: { _method: post|put }
+
+package_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VirginChannelGuideBundle:Package:delete" }
+    requirements: { _method: post|delete }

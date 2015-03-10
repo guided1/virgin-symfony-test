@@ -21,6 +21,14 @@ class Region
      */
     private $id;
 
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
     /**
      * Get id
      *
@@ -29,5 +37,27 @@ class Region
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

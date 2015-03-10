@@ -1,0 +1,30 @@
+regionalisedchannel:
+    path:     /
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:index" }
+
+regionalisedchannel_show:
+    path:     /{id}/show
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:show" }
+
+regionalisedchannel_new:
+    path:     /new
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:new" }
+
+regionalisedchannel_create:
+    path:     /create
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:create" }
+    requirements: { _method: post }
+
+regionalisedchannel_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:edit" }
+
+regionalisedchannel_update:
+    path:     /{id}/update
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:update" }
+    requirements: { _method: post|put }
+
+regionalisedchannel_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "VirginChannelGuideBundle:RegionalisedChannel:delete" }
+    requirements: { _method: post|delete }

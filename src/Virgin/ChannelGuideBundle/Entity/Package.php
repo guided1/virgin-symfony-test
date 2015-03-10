@@ -116,9 +116,19 @@ class Package
         $this->subPackages[] = $package;
     }
 
+    public function setSubPackages($packages)
+    {
+        $this->subPackages = $packages;
+    }
+
 
     public function getSubPackages()
     {
         return $this->subPackages;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
     }
 }

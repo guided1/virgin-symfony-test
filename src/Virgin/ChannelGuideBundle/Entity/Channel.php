@@ -64,4 +64,8 @@ class Channel implements ChannelInterface
     {
         return $this->number;
     }
+
+    public function __toString() {
+        return $this->getName();
+    }
 }

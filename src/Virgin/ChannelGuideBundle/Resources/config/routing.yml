@@ -1,3 +1,15 @@
+virgin_channel_guide_regionalisedchannel:
+    resource: "@VirginChannelGuideBundle/Resources/config/routing/regionalisedchannel.yml"
+    prefix:   /regionalisedchannel
+
+virgin_channel_guide_package:
+    resource: "@VirginChannelGuideBundle/Resources/config/routing/package.yml"
+    prefix:   /package
+
+virgin_channel_guide_region:
+    resource: "@VirginChannelGuideBundle/Resources/config/routing/region.yml"
+    prefix:   /region
+
 virgin_channel_guide_channel:
     resource: "@VirginChannelGuideBundle/Resources/config/routing/channel.yml"
     prefix:   /channel
